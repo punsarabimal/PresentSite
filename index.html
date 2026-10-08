@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>International Day of Peace - Interactive Presentation System</title>
+  <meta name="description" content="A futuristic, cinematic web presentation template and offline-first CMS for the International Day of Peace event.">
+  <meta property="og:title" content="International Day of Peace - Interactive Presentation System">
+  <meta property="og:description" content="A futuristic, cinematic web presentation template and offline-first CMS for the International Day of Peace event.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Ambient Space Background & Particle Canvas -->
+  <div class="cosmic-background" aria-hidden="true">
+    <div class="cosmic-aurora"></div>
+    <div class="cosmic-vignette"></div>
+    <canvas id="ambient-canvas" class="ambient-canvas"></canvas>
+  </div>
+
+  <!-- Master Application Container -->
+  <div id="app" class="app-container">
+
+    <!-- Hero Header / Peace Symbol (Persistent & Dynamic) -->
+    <header class="hero-header">
+      <div class="peace-emblem-wrap" title="International Peace Symbol">
+        <!-- Mathematically Pure SVG Peace Symbol -->
+        <svg class="peace-svg" viewBox="0 0 100 100" aria-label="Peace Emblem">
+          <defs>
+            <linearGradient id="peaceGlowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#7dd3fc" />
+              <stop offset="50%" stop-color="#38bdf8" />
+              <stop offset="100%" stop-color="#2563eb" />
+            </linearGradient>
+            <filter id="peaceNeonFilter" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3.5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <!-- Outer Circle Ring -->
+          <circle cx="50" cy="50" r="43" fill="none" stroke="url(#peaceGlowGrad)" stroke-width="4.5" filter="url(#peaceNeonFilter)" />
+          <!-- Central Vertical Axis -->
+          <line x1="50" y1="7" x2="50" y2="93" stroke="url(#peaceGlowGrad)" stroke-width="4.5" stroke-linecap="round" filter="url(#peaceNeonFilter)" />
+          <!-- Left Diagonal Peace Branch -->
+          <line x1="50" y1="50" x2="19.6" y2="80.4" stroke="url(#peaceGlowGrad)" stroke-width="4.5" stroke-linecap="round" filter="url(#peaceNeonFilter)" />
+          <!-- Right Diagonal Peace Branch -->
+          <line x1="50" y1="50" x2="80.4" y2="80.4" stroke="url(#peaceGlowGrad)" stroke-width="4.5" stroke-linecap="round" filter="url(#peaceNeonFilter)" />
+        </svg>
+      </div>
+
+      <h1 id="main-title" class="main-title">International Day of Peace</h1>
+      <p id="main-subtitle" class="main-subtitle">07.10.2026</p>
+      <div class="motto-badge">
+        <span class="live-pulse-dot" aria-hidden="true"></span>
+        <span>Global Assembly Presentation</span>
+      </div>
+    </header>
+
+    <!-- Main Content Area: Switchable Views -->
+    <main>
+      <!-- 1. HOME VIEW (Interactive Menu Grid) -->
+      <section id="home-view" class="view-container">
+        <!-- 10 Responsive Glassmorphism Presentation Cards -->
+        <div id="menu-grid" class="menu-grid" role="region" aria-label="Presentation Slide Menu"></div>
+
+        <!-- Home Bottom Control Bar -->
+        <footer class="home-bottom-bar">
+          <div class="bottom-brand">
+            <span class="brand-dot" aria-hidden="true"></span>
+            <span>Peace Day Live Presentation Deck</span>
+          </div>
+          <div class="home-actions">
+            <button id="btn-fullscreen" class="btn" type="button" aria-label="Toggle Fullscreen Mode">
+              <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+              </svg>
+              <span class="btn-label">Enter Fullscreen</span>
+            </button>
+            <button id="btn-open-admin" class="btn btn-primary" type="button" aria-label="Open Presentation CMS">
+              <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              <span>Admin Panel</span>
+            </button>
+          </div>
+        </footer>
+      </section>
+
+      <!-- 2. SLIDE PRESENTATION VIEW -->
+      <section id="slide-view" class="view-container slide-view view-hidden">
+        <!-- Top Navigation Bar -->
+        <nav class="slide-top-nav" aria-label="Slide Navigation">
+          <div class="slide-breadcrumbs">
+            <button id="btn-back-home" class="btn" type="button" aria-label="Return to Presentation Menu">
+              <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              <span>Back to Home</span>
+            </button>
+            <span id="slide-current-badge" class="slide-badge">Slide 01 / 10</span>
+          </div>
+
+          <div class="slide-quick-actions">
+            <button id="btn-slide-fullscreen" class="btn btn-icon-only" type="button" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">
+              <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+              </svg>
+            </button>
+            <button id="btn-slide-admin" class="btn btn-icon-only" type="button" title="Open Presentation Admin" aria-label="Open Admin">
+              <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </button>
+          </div>
+        </nav>
+
+        <!-- Slide Stage Presentation Card -->
+        <article class="slide-stage-card">
+          <header class="slide-hero-title-area">
+            <h2 id="slide-current-title" class="slide-current-title">Slide Title</h2>
+          </header>
+
+          <!-- Rich Slide Text -->
+          <div id="slide-content-text" class="slide-content-text"></div>
+
+          <!-- Slide Media Container (Image, Built-in Custom Audio, Video) -->
+          <div id="slide-media-gallery" class="slide-media-gallery"></div>
+        </article>
+
+        <!-- Slide Bottom Navigation Bar -->
+        <footer class="slide-bottom-nav">
+          <button id="btn-prev-slide" class="btn" type="button" aria-label="Previous Slide">
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Previous Slide</span>
+          </button>
+
+          <div id="slide-nav-dots" class="slide-nav-indicators" aria-label="Slide Indicator Dots"></div>
+
+          <button id="btn-next-slide" class="btn btn-primary" type="button" aria-label="Next Slide">
+            <span>Next Slide</span>
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </footer>
+      </section>
+    </main>
+
+  </div>
+
+  <!-- ==========================================================================
+       ADMIN PANEL MODAL (Content Management System)
+       ========================================================================== -->
+  <div id="admin-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="admin-dialog-title" aria-hidden="true">
+    <div class="admin-window">
+      <!-- Admin Window Header -->
+      <header class="admin-header">
+        <div class="admin-title-group">
+          <svg class="icon-svg" style="color:var(--accent-cyan);" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <h2 id="admin-dialog-title">Presentation Content Manager</h2>
+          <span class="admin-status-pill">Offline LocalStorage</span>
+        </div>
+        <button id="btn-close-admin" class="btn btn-icon-only" type="button" aria-label="Close Admin Panel">
+          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+
+      <!-- Admin Window Scrollable Body -->
+      <div class="admin-body">
+
+        <!-- Section 1: Global Presentation Settings -->
+        <section class="admin-section">
+          <h3 class="section-label">General Event Settings</h3>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="admin-main-title" class="form-label">Presentation Main Title</label>
+              <input type="text" id="admin-main-title" class="form-input" placeholder="e.g. International Day of Peace">
+            </div>
+            <div class="form-group">
+              <label for="admin-subtitle" class="form-label">Subtitle / Event Date</label>
+              <input type="text" id="admin-subtitle" class="form-input" placeholder="e.g. 07.10.2026">
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 2: Slide Management & Reordering -->
+        <section class="admin-section">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h3 class="section-label">Presentation Slides (Reorder &amp; Select)</h3>
+            <button id="btn-add-slide" class="btn btn-primary" type="button" style="padding:0.4rem 0.9rem;min-height:34px;font-size:0.8rem;">
+              <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span>Add New Slide</span>
+            </button>
+          </div>
+          <!-- Dynamic Slide Row List -->
+          <div id="admin-slide-list" class="admin-slide-list" role="list"></div>
+        </section>
+
+        <!-- Section 3: Slide Editor (for selected slide) -->
+        <section class="admin-section">
+          <h3 class="section-label">Slide Content &amp; Media Editor</h3>
+          <div id="editor-container" class="editor-card">
+            
+            <div class="form-group">
+              <label for="edit-slide-title" class="form-label">Slide Heading / Title</label>
+              <input type="text" id="edit-slide-title" class="form-input" placeholder="Enter slide title">
+            </div>
+
+            <div class="form-group">
+              <label for="edit-slide-content" class="form-label">Slide Narrative / Content (Separate paragraphs with double enter)</label>
+              <textarea id="edit-slide-content" class="form-textarea" placeholder="Enter slide speech, narrative or description text"></textarea>
+            </div>
+
+            <!-- Media Section: Image -->
+            <div class="media-field-box">
+              <div class="media-field-header">
+                <span>1. Image Attachment</span>
+                <button type="button" id="btn-remove-image" class="btn-mini btn-mini-danger" style="display:none;">Remove Image</button>
+              </div>
+              <div class="form-grid-2">
+                <input type="url" id="edit-image-url" class="form-input" placeholder="Image web URL (https://...)">
+                <input type="file" id="edit-image-file" class="form-input" accept="image/*" title="Upload local image">
+              </div>
+              <div id="image-preview-box" class="media-preview-strip" style="display:none;"></div>
+            </div>
+
+            <!-- Media Section: Audio -->
+            <div class="media-field-box">
+              <div class="media-field-header">
+                <span>2. Built-in Audio Track</span>
+                <button type="button" id="btn-remove-audio" class="btn-mini btn-mini-danger" style="display:none;">Remove Audio</button>
+              </div>
+              <div class="form-grid-2">
+                <input type="url" id="edit-audio-url" class="form-input" placeholder="Audio web URL (https://...)">
+                <input type="file" id="edit-audio-file" class="form-input" accept="audio/*" title="Upload local audio">
+              </div>
+              <div id="audio-preview-box" class="media-preview-strip" style="display:none;"></div>
+            </div>
+
+            <!-- Media Section: Video -->
+            <div class="media-field-box">
+              <div class="media-field-header">
+                <span>3. Video Presentation</span>
+                <button type="button" id="btn-remove-video" class="btn-mini btn-mini-danger" style="display:none;">Remove Video</button>
+              </div>
+              <div class="form-grid-2">
+                <input type="url" id="edit-video-url" class="form-input" placeholder="Video web URL (https://...)">
+                <input type="file" id="edit-video-file" class="form-input" accept="video/*" title="Upload local video">
+              </div>
+              <div id="video-preview-box" class="media-preview-strip" style="display:none;"></div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Admin Window Footer -->
+      <footer class="admin-footer">
+        <button id="btn-reset-defaults" class="btn btn-danger" type="button">
+          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+          <span>Reset to Original Defaults</span>
+        </button>
+        <span style="font-size:0.8rem;color:var(--text-muted);">Autosave active &bull; Stored locally in browser</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       STYLED CONFIRMATION MODAL
+       ========================================================================== -->
+  <div id="confirm-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="confirm-dialog">
+      <h3 id="confirm-title">Confirmation Required</h3>
+      <p id="confirm-message">Are you sure you want to proceed?</p>
+      <div class="confirm-actions">
+        <button id="btn-confirm-cancel" class="btn" type="button">Cancel</button>
+        <button id="btn-confirm-action" class="btn btn-danger" type="button">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightweight Toast Notifications Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+</body>
+</html>

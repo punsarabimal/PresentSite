@@ -1,0 +1,6 @@
+{
+  "name": "International Day of Peace - Interactive Presentation System",
+  "description": "A futuristic, cinematic web presentation template and offline-first CMS for the International Day of Peace event.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
